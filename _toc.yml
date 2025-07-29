@@ -2,6 +2,7 @@ format: jb-book
 root: intro
 
 chapters:
+  - file: intro_computer_vision
   - file: sesion1_ann_in_computer_vision
   - file: sesion1_intro_to_cnn
   - file: sesion2_practical_cnn

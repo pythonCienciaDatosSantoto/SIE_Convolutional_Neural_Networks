@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠 &#8212; Programación para Ciencia de Datos</title>
+    <title>Introducción a la Visión por Computador (Computer Vision) &#8212; Programación para Ciencia de Datos</title>
   
   
   
@@ -57,10 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'intro_computer_vision';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introducción a la Visión por Computador (Computer Vision)" href="intro_computer_vision.html" />
+    <link rel="next" title="Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes" href="sesion1_ann_in_computer_vision.html" />
+    <link rel="prev" title="🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -143,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -174,14 +173,14 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro_computer_vision.html">Introducción a la Visión por Computador (Computer Vision)</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introducción a la Visión por Computador (Computer Vision)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sesion1_ann_in_computer_vision.html">Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sesion1_intro_to_cnn.html">Los Bloques Fundamentales de las CNNs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sesion2_practical_cnn.html">Construyendo Nuestra Primera CNN</a></li>
@@ -239,7 +238,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/intro_computer_vision.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -323,7 +322,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠</h1>
+    <h1>Introducción a la Visión por Computador (Computer Vision)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -333,13 +332,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparate-para-ensenar-a-las-maquinas-a-ver">🔥 ¡Prepárate para Enseñar a las Máquinas a Ver! 🔥</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-del-curso">📚 Contenido del Curso 📚</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesion-1-los-fundamentos-que-son-las-cnns"><strong>Sesión 1: Los Fundamentos - ¿Qué son las CNNs?</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesion-2-construyendo-nuestra-primera-cnn"><strong>Sesión 2: Construyendo Nuestra Primera CNN</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesion-3-mas-alla-de-la-clasificacion"><strong>Sesión 3: Más Allá de la Clasificación</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-vision-por-computador">¿Qué es la Visión por Computador?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-breve-recorrido-historico">Un Breve Recorrido Histórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tareas-fundamentales-en-vision-por-computador">Tareas Fundamentales en Visión por Computador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-y-recursos-adicionales">Referencias y Recursos Adicionales</a></li>
 </ul>
             </nav>
         </div>
@@ -351,55 +347,53 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="bienvenido-a-al-cursillo-de-introduccion-a-las-redes-neuronales-convolucionales-cnns">
-<h1>🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠<a class="headerlink" href="#bienvenido-a-al-cursillo-de-introduccion-a-las-redes-neuronales-convolucionales-cnns" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
-<section id="preparate-para-ensenar-a-las-maquinas-a-ver">
-<h2>🔥 ¡Prepárate para Enseñar a las Máquinas a Ver! 🔥<a class="headerlink" href="#preparate-para-ensenar-a-las-maquinas-a-ver" title="Link to this heading">#</a></h2>
-<p>¿Alguna vez te has preguntado cómo tu teléfono reconoce tu rostro para desbloquearse, cómo los autos autónomos identifican peatones y señales de tráfico, o cómo las redes sociales te sugieren etiquetar a tus amigos en las fotos? La respuesta a estas asombrosas hazañas de la tecnología moderna se encuentra en las <strong>Redes Neuronales Convolucionales (CNNs)</strong>.</p>
-<p>Las CNNs son un tipo de algoritmo de <em>Deep Learning</em> inspirado en la corteza visual humana. En lugar de programar reglas explícitas, les enseñamos a “aprender” a reconocer patrones directamente desde imágenes, videos y otros tipos de datos visuales. ¡Son el cerebro detrás de la revolución de la visión por computadora!</p>
-<p>En este curso, desmitificaremos la magia de las CNNs. No solo entenderás la teoría, sino que darás tus primeros pasos para construir modelos que puedan “ver” e interpretar el mundo. ¡Prepárate para un viaje fascinante desde los píxeles hasta las predicciones!</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduccion-a-la-vision-por-computador-computer-vision">
+<h1>Introducción a la Visión por Computador (Computer Vision)<a class="headerlink" href="#introduccion-a-la-vision-por-computador-computer-vision" title="Link to this heading">#</a></h1>
+<section id="que-es-la-vision-por-computador">
+<h2>¿Qué es la Visión por Computador?<a class="headerlink" href="#que-es-la-vision-por-computador" title="Link to this heading">#</a></h2>
+<p>La Visión por Computador es un campo de la inteligencia artificial (IA) y de las ciencias de la computación que busca permitir que las computadoras y los sistemas “vean”, interpreten y comprendan el mundo visual. Utilizando imágenes digitales de cámaras y videos, así como modelos de aprendizaje profundo, las máquinas pueden identificar y localizar objetos con precisión, y luego reaccionar a lo que “ven”.</p>
+<p>En esencia, el objetivo es enseñar a las máquinas a percibir el mundo de una manera similar a como lo hacen los humanos.</p>
+<p>“El gran objetivo de la Visión por Computador es hacer que los computadores entiendan las imágenes y los videos al nivel de un humano.”</p>
+<p>— Fei-Fei Li, Profesora de la Universidad de Stanford y pionera en IA.</p>
 </section>
-<hr class="docutils" />
-<section id="contenido-del-curso">
-<h2>📚 Contenido del Curso 📚<a class="headerlink" href="#contenido-del-curso" title="Link to this heading">#</a></h2>
-<p>A continuación, encontrarás el plan de estudios que hemos preparado para estas tres sesiones.</p>
-<section id="sesion-1-los-fundamentos-que-son-las-cnns">
-<h3><strong>Sesión 1: Los Fundamentos - ¿Qué son las CNNs?</strong><a class="headerlink" href="#sesion-1-los-fundamentos-que-son-las-cnns" title="Link to this heading">#</a></h3>
+<section id="un-breve-recorrido-historico">
+<h2>Un Breve Recorrido Histórico<a class="headerlink" href="#un-breve-recorrido-historico" title="Link to this heading">#</a></h2>
+<p>La idea de dar vista a las máquinas no es nueva, pero el campo ha experimentado una explosión de avances en la última década gracias al Deep Learning.</p>
 <ul class="simple">
-<li><p><strong>Introducción:</strong> ¿Qué es la visión por computadora?</p></li>
-<li><p><strong>Limitaciones de las redes neuronales tradicionales:</strong> El problema con las imágenes.</p></li>
-<li><p><strong>La inspiración biológica:</strong> El córtex visual.</p></li>
-<li><p><strong>Componentes clave:</strong> Convoluciones, capas de <em>pooling</em> y funciones de activación.</p></li>
-<li><p><strong>Taller práctico:</strong> Tu primera convolución.</p></li>
+<li><p>Los Inicios (1960s-1980s): Los primeros intentos se centraron en extraer características simples como bordes y esquinas mediante algoritmos manuales. Un trabajo pionero fue el Neocognitron (Fukushima, 1980), una de las primeras arquitecturas neuronales jerárquicas inspirada en la corteza visual humana, sentando las bases para las futuras CNNs.</p></li>
+<li><p>Las Primeras CNNs (1990s): Yann LeCun et al. desarrollaron LeNet-5 en 1998, una de las primeras Redes Neuronales Convolucionales exitosas, que demostró un rendimiento excepcional en el reconocimiento de dígitos manuscritos. Este fue un hito que probó la viabilidad de las CNNs para tareas de reconocimiento de patrones.</p></li>
+<li><p>La Revolución del Deep Learning (2012-Presente): El punto de inflexión llegó en 2012 con la competencia ImageNet (ILSVRC). La arquitectura AlexNet (Krizhevsky et al.) redujo drásticamente la tasa de error y demostró la superioridad de las CNNs profundas entrenadas en GPUs. A partir de ahí, surgieron arquitecturas cada vez más sofisticadas que siguieron rompiendo récords:</p></li>
+</ul>
+<p>VGGNet (2014): Demostró que la profundidad de la red era un factor crítico.</p>
+<p>GoogLeNet / Inception (2014): Introdujo módulos “Inception” para una mayor eficiencia computacional.</p>
+<p>ResNet (2015): Introdujo las “conexiones residuales” para permitir el entrenamiento de redes extremadamente profundas (más de 150 capas) sin problemas de desvanecimiento de gradiente.</p>
+</section>
+<section id="tareas-fundamentales-en-vision-por-computador">
+<h2>Tareas Fundamentales en Visión por Computador<a class="headerlink" href="#tareas-fundamentales-en-vision-por-computador" title="Link to this heading">#</a></h2>
+<p>La Visión por Computador abarca una variedad de tareas, desde las más simples hasta las más complejas:</p>
+<ul class="simple">
+<li><p>Clasificación de Imágenes: La tarea más básica. El objetivo es asignar una etiqueta a una imagen completa. (Ej: “Esta imagen contiene un perro”).</p></li>
+<li><p>Localización de Objetos: Además de clasificar, se dibuja un cuadro delimitador (bounding box) alrededor de la instancia del objeto.</p></li>
+<li><p>Detección de Objetos: Es la localización de múltiples objetos en una misma imagen. Es la tarea que abordamos con R-CNN y YOLO.</p></li>
+<li><p>Segmentación de Imágenes: La tarea más granular. El objetivo es clasificar cada píxel de la imagen, creando una máscara precisa para cada objeto.</p></li>
 </ul>
 </section>
-<section id="sesion-2-construyendo-nuestra-primera-cnn">
-<h3><strong>Sesión 2: Construyendo Nuestra Primera CNN</strong><a class="headerlink" href="#sesion-2-construyendo-nuestra-primera-cnn" title="Link to this heading">#</a></h3>
-<p><em>(Aquí puedes detallar el contenido de la segunda sesión. Por ejemplo:)</em></p>
+<section id="referencias-y-recursos-adicionales">
+<h2>Referencias y Recursos Adicionales<a class="headerlink" href="#referencias-y-recursos-adicionales" title="Link to this heading">#</a></h2>
+<p>Para aquellos interesados en profundizar, aquí hay una lista de recursos clave.</p>
+<p>Artículos Científicos (Papers) Clave</p>
 <ul class="simple">
-<li><p><strong>Arquitecturas Famosas:</strong> LeNet, AlexNet.</p></li>
-<li><p><strong>Manos a la obra:</strong> Usando TensorFlow/Keras para construir una CNN.</p></li>
-<li><p><strong>El set de datos:</strong> Trabajando con MNIST o CIFAR-10.</p></li>
-<li><p><strong>Entrenamiento y evaluación:</strong> ¿Cómo saber si nuestro modelo aprende?</p></li>
-<li><p><strong>Taller práctico:</strong> Entrenando un clasificador de imágenes.</p></li>
+<li><p>Neocognitron: Fukushima, K. (1980). Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. <a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr08/cos598B/Readings/Fukushima1980.pdf">Link al paper:</a></p></li>
+<li><p>LeNet-5: LeCun, Y., Bottou, L., Bengio, Y., &amp; Haffner, P. (2002). Gradient-based learning applied to document recognition. <a class="reference external" href="https://hal.science/hal-03926082/document">Link al paper:</a></p></li>
+<li><p>AlexNet: Krizhevsky, A., Sutskever, I., &amp; Hinton, G. E. (2012). ImageNet classification with deep convolutional neural networks. <a class="reference external" href="https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf">Link al paper:</a></p></li>
+<li><p>VGGNet: Simonyan, K., &amp; Zisserman, A. (2014). Very deep convolutional networks for large-scale image recognition. <a class="reference external" href="https://arxiv.org/pdf/1409.1556">Link al paper:</a></p></li>
+<li><p>GoogLeNet: Szegedy, C., Liu, W., Jia, Y., Sermanet, P., Reed, S., Anguelov, D. &amp; Rabinovich, A. (2015). Going deeper with convolutions. <a class="reference external" href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf">Link al paper:</a></p></li>
+<li><p>ResNet: He, K., Zhang, X., Ren, S., &amp; Sun, J. (2016). Deep residual learning for image recognition. <a class="reference external" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf">Link al paper:</a></p></li>
 </ul>
+<p>Libros Recomendados
+“Deep Learning with Python” por François Chollet (creador de Keras). Excelente para una introducción práctica.</p>
+<p>“Computer Vision: Algorithms and Applications” por Richard Szeliski. Un texto clásico y completo sobre los fundamentos.</p>
 </section>
-<section id="sesion-3-mas-alla-de-la-clasificacion">
-<h3><strong>Sesión 3: Más Allá de la Clasificación</strong><a class="headerlink" href="#sesion-3-mas-alla-de-la-clasificacion" title="Link to this heading">#</a></h3>
-<p><em>(Aquí puedes detallar el contenido de la tercera sesión. Por ejemplo:)</em></p>
-<ul class="simple">
-<li><p><strong>Visualizando lo que aprende la red:</strong> ¿Qué ven realmente nuestras capas?</p></li>
-<li><p><em><strong>Transfer Learning:</strong></em> No reinventes la rueda.</p></li>
-<li><p><strong>Aplicaciones avanzadas:</strong> Detección de objetos y segmentación.</p></li>
-<li><p><strong>Próximos pasos:</strong> ¿Hacia dónde puedes llevar este conocimiento?</p></li>
-<li><p><strong>Proyecto final:</strong> Presentación de ideas.</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -432,12 +426,21 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="intro_computer_vision.html"
+       href="sesion1_ann_in_computer_vision.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introducción a la Visión por Computador (Computer Vision)</p>
+        <p class="prev-next-title">Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -457,13 +460,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparate-para-ensenar-a-las-maquinas-a-ver">🔥 ¡Prepárate para Enseñar a las Máquinas a Ver! 🔥</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-del-curso">📚 Contenido del Curso 📚</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesion-1-los-fundamentos-que-son-las-cnns"><strong>Sesión 1: Los Fundamentos - ¿Qué son las CNNs?</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesion-2-construyendo-nuestra-primera-cnn"><strong>Sesión 2: Construyendo Nuestra Primera CNN</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesion-3-mas-alla-de-la-clasificacion"><strong>Sesión 3: Más Allá de la Clasificación</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-vision-por-computador">¿Qué es la Visión por Computador?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-breve-recorrido-historico">Un Breve Recorrido Histórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tareas-fundamentales-en-vision-por-computador">Tareas Fundamentales en Visión por Computador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-y-recursos-adicionales">Referencias y Recursos Adicionales</a></li>
 </ul>
   </nav></div>
 
