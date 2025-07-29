@@ -1,0 +1,5 @@
+title: Programación para Ciencia de Datos
+author: Wilmer Pineda
+logo: images/logo_sie.png  # si tienes uno
+execute:
+  execute_notebooks: auto
