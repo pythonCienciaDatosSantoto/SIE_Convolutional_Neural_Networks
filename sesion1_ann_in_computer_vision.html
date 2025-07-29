@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes &#8212; Introducción a las Redes Neuronales Convolucionales</title>
+    <title>Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes &#8212; Programación para Ciencia de Datos</title>
   
   
   
@@ -153,8 +153,8 @@
       
     
     
-    <img src="_static/logo_sie.png" class="logo__image only-light" alt="Introducción a las Redes Neuronales Convolucionales - Home"/>
-    <script>document.write(`<img src="_static/logo_sie.png" class="logo__image only-dark" alt="Introducción a las Redes Neuronales Convolucionales - Home"/>`);</script>
+    <img src="_static/logo_sie.png" class="logo__image only-light" alt="Programación para Ciencia de Datos - Home"/>
+    <script>document.write(`<img src="_static/logo_sie.png" class="logo__image only-dark" alt="Programación para Ciencia de Datos - Home"/>`);</script>
   
   
 </a></div>
@@ -182,6 +182,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sesion1_intro_to_cnn.html">Los Bloques Fundamentales de las CNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion2_practical_cnn.html">Construyendo Nuestra Primera CNN</a></li>
 </ul>
 
     </div>
@@ -480,18 +481,22 @@ Ejemplo de etiqueta en formato One-Hot: [0. 0. 0. 0. 0. 0. 1. 0. 0. 0.]
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Construyendo el Modelo 1 ---
 </pre></div>
 </div>
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_1"</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\layers\reshaping\flatten.py:37: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(**kwargs)
+</pre></div>
+</div>
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential"</span>
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> Layer (type)                    </span>┃<span style="font-weight: bold"> Output Shape           </span>┃<span style="font-weight: bold">       Param # </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ flatten_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Flatten</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">3072</span>)           │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
+│ flatten (<span style="color: #0087ff; text-decoration-color: #0087ff">Flatten</span>)               │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">3072</span>)           │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_3 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">512</span>)            │     <span style="color: #00af00; text-decoration-color: #00af00">1,573,376</span> │
+│ dense (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                   │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">512</span>)            │     <span style="color: #00af00; text-decoration-color: #00af00">1,573,376</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_4 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">256</span>)            │       <span style="color: #00af00; text-decoration-color: #00af00">131,328</span> │
+│ dense_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">256</span>)            │       <span style="color: #00af00; text-decoration-color: #00af00">131,328</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_5 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">10</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">2,570</span> │
+│ dense_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">10</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">2,570</span> │
 └─────────────────────────────────┴────────────────────────┴───────────────┘
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">1,707,274</span> (6.51 MB)
@@ -513,7 +518,7 @@ Ejemplo de etiqueta en formato One-Hot: [0. 0. 0. 0. 0. 0. 1. 0. 0. 0.]
               <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 
 <span class="n">history_1</span> <span class="o">=</span> <span class="n">model_1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train_norm</span><span class="p">,</span> <span class="n">y_train_cat</span><span class="p">,</span>
-                      <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                      <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                       <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
                       <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test_norm</span><span class="p">,</span> <span class="n">y_test_cat</span><span class="p">))</span>
 </pre></div>
@@ -521,36 +526,206 @@ Ejemplo de etiqueta en formato One-Hot: [0. 0. 0. 0. 0. 0. 1. 0. 0. 0.]
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Compilando y Entrenando el Modelo 1 ---
-Epoch 1/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">11s</span> 13ms/step - accuracy: 0.2805 - loss: 2.0355 - val_accuracy: 0.3785 - val_loss: 1.7218
-Epoch 2/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.4017 - loss: 1.6824 - val_accuracy: 0.4243 - val_loss: 1.5887
-Epoch 3/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.4279 - loss: 1.5997 - val_accuracy: 0.4383 - val_loss: 1.5541
-Epoch 4/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.4526 - loss: 1.5292 - val_accuracy: 0.4394 - val_loss: 1.5530
-Epoch 5/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.4695 - loss: 1.4836 - val_accuracy: 0.4742 - val_loss: 1.4746
-Epoch 6/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.4853 - loss: 1.4533 - val_accuracy: 0.4667 - val_loss: 1.5089
-Epoch 7/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.4906 - loss: 1.4356 - val_accuracy: 0.4721 - val_loss: 1.4813
-Epoch 8/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5014 - loss: 1.4056 - val_accuracy: 0.4922 - val_loss: 1.4330
-Epoch 9/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5097 - loss: 1.3780 - val_accuracy: 0.4922 - val_loss: 1.4307
-Epoch 10/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5159 - loss: 1.3518 - val_accuracy: 0.4541 - val_loss: 1.5351
-Epoch 11/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5166 - loss: 1.3409 - val_accuracy: 0.4837 - val_loss: 1.4401
-Epoch 12/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5313 - loss: 1.3131 - val_accuracy: 0.5014 - val_loss: 1.4057
-Epoch 13/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5399 - loss: 1.2862 - val_accuracy: 0.4867 - val_loss: 1.4233
-Epoch 14/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5451 - loss: 1.2731 - val_accuracy: 0.5022 - val_loss: 1.4115
-Epoch 15/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5523 - loss: 1.2547 - val_accuracy: 0.5070 - val_loss: 1.4074
+Epoch 1/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">11s</span> 13ms/step - accuracy: 0.2785 - loss: 2.0386 - val_accuracy: 0.3764 - val_loss: 1.7350
+Epoch 2/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.3914 - loss: 1.6960 - val_accuracy: 0.4094 - val_loss: 1.6458
+Epoch 3/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.4315 - loss: 1.5957 - val_accuracy: 0.4343 - val_loss: 1.5935
+Epoch 4/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.4496 - loss: 1.5345 - val_accuracy: 0.4329 - val_loss: 1.5980
+Epoch 5/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.4691 - loss: 1.4957 - val_accuracy: 0.4704 - val_loss: 1.4883
+Epoch 6/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.4809 - loss: 1.4579 - val_accuracy: 0.4744 - val_loss: 1.4880
+Epoch 7/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.4918 - loss: 1.4236 - val_accuracy: 0.4667 - val_loss: 1.4836
+Epoch 8/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5009 - loss: 1.3987 - val_accuracy: 0.4717 - val_loss: 1.4938
+Epoch 9/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5077 - loss: 1.3836 - val_accuracy: 0.4813 - val_loss: 1.4824
+Epoch 10/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5147 - loss: 1.3612 - val_accuracy: 0.4729 - val_loss: 1.4823
+Epoch 11/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5254 - loss: 1.3335 - val_accuracy: 0.4674 - val_loss: 1.5276
+Epoch 12/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5304 - loss: 1.3098 - val_accuracy: 0.4906 - val_loss: 1.4409
+Epoch 13/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5304 - loss: 1.3154 - val_accuracy: 0.4933 - val_loss: 1.4321
+Epoch 14/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5426 - loss: 1.2877 - val_accuracy: 0.4908 - val_loss: 1.4376
+Epoch 15/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5503 - loss: 1.2610 - val_accuracy: 0.4943 - val_loss: 1.4201
+Epoch 16/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5467 - loss: 1.2646 - val_accuracy: 0.5088 - val_loss: 1.3907
+Epoch 17/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5584 - loss: 1.2373 - val_accuracy: 0.4992 - val_loss: 1.4173
+Epoch 18/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5623 - loss: 1.2217 - val_accuracy: 0.5097 - val_loss: 1.4022
+Epoch 19/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5708 - loss: 1.2028 - val_accuracy: 0.4971 - val_loss: 1.4366
+Epoch 20/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5698 - loss: 1.1961 - val_accuracy: 0.4975 - val_loss: 1.4404
+Epoch 21/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5787 - loss: 1.1882 - val_accuracy: 0.5073 - val_loss: 1.4334
+Epoch 22/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.5806 - loss: 1.1771 - val_accuracy: 0.5021 - val_loss: 1.4147
+Epoch 23/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.5826 - loss: 1.1599 - val_accuracy: 0.5030 - val_loss: 1.4316
+Epoch 24/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5931 - loss: 1.1422 - val_accuracy: 0.4986 - val_loss: 1.4558
+Epoch 25/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5852 - loss: 1.1445 - val_accuracy: 0.5068 - val_loss: 1.4262
+Epoch 26/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.5965 - loss: 1.1316 - val_accuracy: 0.4894 - val_loss: 1.4691
+Epoch 27/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6021 - loss: 1.1125 - val_accuracy: 0.4976 - val_loss: 1.4554
+Epoch 28/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6047 - loss: 1.1086 - val_accuracy: 0.4975 - val_loss: 1.4475
+Epoch 29/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6092 - loss: 1.0915 - val_accuracy: 0.5004 - val_loss: 1.4377
+Epoch 30/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6058 - loss: 1.0920 - val_accuracy: 0.5091 - val_loss: 1.4465
+Epoch 31/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6071 - loss: 1.0962 - val_accuracy: 0.5043 - val_loss: 1.4813
+Epoch 32/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6122 - loss: 1.0844 - val_accuracy: 0.5161 - val_loss: 1.4303
+Epoch 33/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6139 - loss: 1.0724 - val_accuracy: 0.5109 - val_loss: 1.4523
+Epoch 34/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6213 - loss: 1.0537 - val_accuracy: 0.5067 - val_loss: 1.4673
+Epoch 35/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6227 - loss: 1.0592 - val_accuracy: 0.4970 - val_loss: 1.4903
+Epoch 36/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6249 - loss: 1.0439 - val_accuracy: 0.5053 - val_loss: 1.4838
+Epoch 37/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6283 - loss: 1.0369 - val_accuracy: 0.5031 - val_loss: 1.4716
+Epoch 38/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6294 - loss: 1.0323 - val_accuracy: 0.5064 - val_loss: 1.4901
+Epoch 39/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6301 - loss: 1.0354 - val_accuracy: 0.4982 - val_loss: 1.5109
+Epoch 40/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6377 - loss: 1.0142 - val_accuracy: 0.4998 - val_loss: 1.5141
+Epoch 41/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6358 - loss: 1.0164 - val_accuracy: 0.5048 - val_loss: 1.5133
+Epoch 42/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6359 - loss: 1.0162 - val_accuracy: 0.4966 - val_loss: 1.5780
+Epoch 43/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6406 - loss: 1.0045 - val_accuracy: 0.5040 - val_loss: 1.4933
+Epoch 44/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6385 - loss: 1.0048 - val_accuracy: 0.5084 - val_loss: 1.5136
+Epoch 45/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6427 - loss: 0.9941 - val_accuracy: 0.4978 - val_loss: 1.5376
+Epoch 46/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6452 - loss: 0.9834 - val_accuracy: 0.5014 - val_loss: 1.5578
+Epoch 47/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6431 - loss: 0.9871 - val_accuracy: 0.4949 - val_loss: 1.5722
+Epoch 48/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6487 - loss: 0.9806 - val_accuracy: 0.5040 - val_loss: 1.5492
+Epoch 49/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6507 - loss: 0.9684 - val_accuracy: 0.4937 - val_loss: 1.5494
+Epoch 50/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6531 - loss: 0.9670 - val_accuracy: 0.4955 - val_loss: 1.5828
+Epoch 51/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6511 - loss: 0.9634 - val_accuracy: 0.4947 - val_loss: 1.5619
+Epoch 52/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6580 - loss: 0.9513 - val_accuracy: 0.4941 - val_loss: 1.5904
+Epoch 53/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6617 - loss: 0.9374 - val_accuracy: 0.4907 - val_loss: 1.6201
+Epoch 54/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6574 - loss: 0.9463 - val_accuracy: 0.4978 - val_loss: 1.6278
+Epoch 55/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6630 - loss: 0.9381 - val_accuracy: 0.5072 - val_loss: 1.5794
+Epoch 56/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6631 - loss: 0.9312 - val_accuracy: 0.5002 - val_loss: 1.6002
+Epoch 57/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6652 - loss: 0.9272 - val_accuracy: 0.4953 - val_loss: 1.6439
+Epoch 58/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6683 - loss: 0.9223 - val_accuracy: 0.5063 - val_loss: 1.6061
+Epoch 59/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6640 - loss: 0.9201 - val_accuracy: 0.4997 - val_loss: 1.6261
+Epoch 60/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6682 - loss: 0.9180 - val_accuracy: 0.5061 - val_loss: 1.6185
+Epoch 61/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6721 - loss: 0.9003 - val_accuracy: 0.4926 - val_loss: 1.6690
+Epoch 62/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6757 - loss: 0.8966 - val_accuracy: 0.4867 - val_loss: 1.6853
+Epoch 63/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6722 - loss: 0.8929 - val_accuracy: 0.4920 - val_loss: 1.6608
+Epoch 64/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.6763 - loss: 0.9052 - val_accuracy: 0.4944 - val_loss: 1.6543
+Epoch 65/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6774 - loss: 0.8936 - val_accuracy: 0.4886 - val_loss: 1.7261
+Epoch 66/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6790 - loss: 0.8903 - val_accuracy: 0.4849 - val_loss: 1.7631
+Epoch 67/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6788 - loss: 0.8923 - val_accuracy: 0.4946 - val_loss: 1.6977
+Epoch 68/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6801 - loss: 0.8849 - val_accuracy: 0.4907 - val_loss: 1.7263
+Epoch 69/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6820 - loss: 0.8768 - val_accuracy: 0.4898 - val_loss: 1.7404
+Epoch 70/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6858 - loss: 0.8672 - val_accuracy: 0.5049 - val_loss: 1.6762
+Epoch 71/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6912 - loss: 0.8517 - val_accuracy: 0.4948 - val_loss: 1.7130
+Epoch 72/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6887 - loss: 0.8622 - val_accuracy: 0.4967 - val_loss: 1.7166
+Epoch 73/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6903 - loss: 0.8601 - val_accuracy: 0.4984 - val_loss: 1.7457
+Epoch 74/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6942 - loss: 0.8484 - val_accuracy: 0.4995 - val_loss: 1.7640
+Epoch 75/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6999 - loss: 0.8438 - val_accuracy: 0.4976 - val_loss: 1.7776
+Epoch 76/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6957 - loss: 0.8505 - val_accuracy: 0.4919 - val_loss: 1.7664
+Epoch 77/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6948 - loss: 0.8451 - val_accuracy: 0.4919 - val_loss: 1.8232
+Epoch 78/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7005 - loss: 0.8269 - val_accuracy: 0.4954 - val_loss: 1.7631
+Epoch 79/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.6968 - loss: 0.8354 - val_accuracy: 0.4922 - val_loss: 1.7951
+Epoch 80/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7003 - loss: 0.8347 - val_accuracy: 0.4880 - val_loss: 1.8561
+Epoch 81/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7024 - loss: 0.8303 - val_accuracy: 0.5068 - val_loss: 1.8178
+Epoch 82/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.6997 - loss: 0.8305 - val_accuracy: 0.4914 - val_loss: 1.8204
+Epoch 83/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7014 - loss: 0.8223 - val_accuracy: 0.4913 - val_loss: 1.8547
+Epoch 84/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.7048 - loss: 0.8225 - val_accuracy: 0.4882 - val_loss: 1.8425
+Epoch 85/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.7036 - loss: 0.8185 - val_accuracy: 0.4903 - val_loss: 1.8737
+Epoch 86/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7055 - loss: 0.8198 - val_accuracy: 0.4960 - val_loss: 1.8523
+Epoch 87/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7090 - loss: 0.8064 - val_accuracy: 0.4845 - val_loss: 1.9405
+Epoch 88/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 12ms/step - accuracy: 0.7069 - loss: 0.8057 - val_accuracy: 0.4812 - val_loss: 1.8674
+Epoch 89/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.7115 - loss: 0.8059 - val_accuracy: 0.4843 - val_loss: 1.8835
+Epoch 90/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7087 - loss: 0.8106 - val_accuracy: 0.4929 - val_loss: 1.8764
+Epoch 91/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7113 - loss: 0.8001 - val_accuracy: 0.4921 - val_loss: 1.8853
+Epoch 92/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7098 - loss: 0.7976 - val_accuracy: 0.4796 - val_loss: 1.9448
+Epoch 93/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7148 - loss: 0.7927 - val_accuracy: 0.4814 - val_loss: 1.9366
+Epoch 94/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.7136 - loss: 0.7922 - val_accuracy: 0.4847 - val_loss: 1.9100
+Epoch 95/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7162 - loss: 0.7895 - val_accuracy: 0.4839 - val_loss: 1.9583
+Epoch 96/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.7173 - loss: 0.7827 - val_accuracy: 0.4846 - val_loss: 1.9763
+Epoch 97/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7214 - loss: 0.7733 - val_accuracy: 0.4823 - val_loss: 1.9853
+Epoch 98/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7147 - loss: 0.7852 - val_accuracy: 0.4943 - val_loss: 1.8929
+Epoch 99/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 12ms/step - accuracy: 0.7213 - loss: 0.7698 - val_accuracy: 0.4837 - val_loss: 1.9554
+Epoch 100/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">10s</span> 13ms/step - accuracy: 0.7146 - loss: 0.7849 - val_accuracy: 0.4884 - val_loss: 1.9667
 </pre></div>
 </div>
 </div>
@@ -589,7 +764,7 @@ Epoch 15/15
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Evaluando los Resultados del Modelo 1 ---
 </pre></div>
 </div>
-<img alt="_images/a3db8fd3f6f16e1509ba8a75c7ff506c461d3dd04188acbfdc9d07279e3f3d0c.png" src="_images/a3db8fd3f6f16e1509ba8a75c7ff506c461d3dd04188acbfdc9d07279e3f3d0c.png" />
+<img alt="_images/bd8cb74b13656d4fa2955ae4417bb49804b2c8f7acdf1727c144ab899785484e.png" src="_images/bd8cb74b13656d4fa2955ae4417bb49804b2c8f7acdf1727c144ab899785484e.png" />
 </div>
 </div>
 </section>
@@ -615,20 +790,20 @@ Epoch 15/15
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Construyendo el Modelo 2 (Profundo y Estrecho) ---
 </pre></div>
 </div>
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_2"</span>
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_1"</span>
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> Layer (type)                    </span>┃<span style="font-weight: bold"> Output Shape           </span>┃<span style="font-weight: bold">       Param # </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ flatten_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Flatten</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">3072</span>)           │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
+│ flatten_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Flatten</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">3072</span>)           │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_6 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">256</span>)            │       <span style="color: #00af00; text-decoration-color: #00af00">786,688</span> │
+│ dense_3 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">256</span>)            │       <span style="color: #00af00; text-decoration-color: #00af00">786,688</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_7 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">128</span>)            │        <span style="color: #00af00; text-decoration-color: #00af00">32,896</span> │
+│ dense_4 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">128</span>)            │        <span style="color: #00af00; text-decoration-color: #00af00">32,896</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_8 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">64</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">8,256</span> │
+│ dense_5 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">64</span>)             │         <span style="color: #00af00; text-decoration-color: #00af00">8,256</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_9 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">10</span>)             │           <span style="color: #00af00; text-decoration-color: #00af00">650</span> │
+│ dense_6 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                 │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">10</span>)             │           <span style="color: #00af00; text-decoration-color: #00af00">650</span> │
 └─────────────────────────────────┴────────────────────────┴───────────────┘
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">828,490</span> (3.16 MB)
@@ -650,7 +825,7 @@ Epoch 15/15
                 <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 
 <span class="n">history_2</span> <span class="o">=</span> <span class="n">model_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train_norm</span><span class="p">,</span> <span class="n">y_train_cat</span><span class="p">,</span>
-                        <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                        <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                         <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
                         <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test_norm</span><span class="p">,</span> <span class="n">y_test_cat</span><span class="p">))</span>
 </pre></div>
@@ -658,36 +833,206 @@ Epoch 15/15
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Compilando y Entrenando el Modelo 2 ---
-Epoch 1/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">7s</span> 7ms/step - accuracy: 0.2525 - loss: 2.0228 - val_accuracy: 0.3361 - val_loss: 1.8604
-Epoch 2/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.3787 - loss: 1.7217 - val_accuracy: 0.4096 - val_loss: 1.6398
-Epoch 3/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4237 - loss: 1.6101 - val_accuracy: 0.4311 - val_loss: 1.5779
-Epoch 4/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4438 - loss: 1.5577 - val_accuracy: 0.4525 - val_loss: 1.5451
-Epoch 5/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4571 - loss: 1.5175 - val_accuracy: 0.4615 - val_loss: 1.4974
-Epoch 6/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4699 - loss: 1.4797 - val_accuracy: 0.4451 - val_loss: 1.5605
-Epoch 7/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4780 - loss: 1.4531 - val_accuracy: 0.4615 - val_loss: 1.4947
-Epoch 8/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4938 - loss: 1.4170 - val_accuracy: 0.4581 - val_loss: 1.5172
-Epoch 9/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5053 - loss: 1.3964 - val_accuracy: 0.4808 - val_loss: 1.4657
-Epoch 10/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5066 - loss: 1.3724 - val_accuracy: 0.4704 - val_loss: 1.4859
-Epoch 11/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">6s</span> 7ms/step - accuracy: 0.5134 - loss: 1.3623 - val_accuracy: 0.4839 - val_loss: 1.4428
-Epoch 12/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5153 - loss: 1.3493 - val_accuracy: 0.4880 - val_loss: 1.4483
-Epoch 13/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5285 - loss: 1.3208 - val_accuracy: 0.4985 - val_loss: 1.4251
-Epoch 14/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5318 - loss: 1.3112 - val_accuracy: 0.4937 - val_loss: 1.4189
-Epoch 15/15
-<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5381 - loss: 1.2912 - val_accuracy: 0.4989 - val_loss: 1.4193
+Epoch 1/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">7s</span> 7ms/step - accuracy: 0.2595 - loss: 2.0123 - val_accuracy: 0.3939 - val_loss: 1.7054
+Epoch 2/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">6s</span> 7ms/step - accuracy: 0.3833 - loss: 1.7109 - val_accuracy: 0.4128 - val_loss: 1.6449
+Epoch 3/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4152 - loss: 1.6271 - val_accuracy: 0.4106 - val_loss: 1.6681
+Epoch 4/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4361 - loss: 1.5697 - val_accuracy: 0.4315 - val_loss: 1.5898
+Epoch 5/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4546 - loss: 1.5211 - val_accuracy: 0.4610 - val_loss: 1.5094
+Epoch 6/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4681 - loss: 1.4849 - val_accuracy: 0.4667 - val_loss: 1.5031
+Epoch 7/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4849 - loss: 1.4446 - val_accuracy: 0.4726 - val_loss: 1.4724
+Epoch 8/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4908 - loss: 1.4248 - val_accuracy: 0.4718 - val_loss: 1.4920
+Epoch 9/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.4992 - loss: 1.3966 - val_accuracy: 0.4653 - val_loss: 1.5022
+Epoch 10/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5026 - loss: 1.3855 - val_accuracy: 0.4914 - val_loss: 1.4360
+Epoch 11/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5165 - loss: 1.3588 - val_accuracy: 0.4974 - val_loss: 1.4150
+Epoch 12/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5261 - loss: 1.3281 - val_accuracy: 0.4952 - val_loss: 1.4209
+Epoch 13/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5272 - loss: 1.3244 - val_accuracy: 0.5014 - val_loss: 1.4140
+Epoch 14/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5279 - loss: 1.3144 - val_accuracy: 0.4809 - val_loss: 1.4616
+Epoch 15/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5339 - loss: 1.2939 - val_accuracy: 0.5148 - val_loss: 1.3860
+Epoch 16/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5446 - loss: 1.2732 - val_accuracy: 0.4939 - val_loss: 1.4341
+Epoch 17/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5448 - loss: 1.2714 - val_accuracy: 0.4839 - val_loss: 1.4654
+Epoch 18/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5600 - loss: 1.2390 - val_accuracy: 0.4946 - val_loss: 1.4373
+Epoch 19/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5595 - loss: 1.2272 - val_accuracy: 0.4850 - val_loss: 1.4751
+Epoch 20/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5592 - loss: 1.2354 - val_accuracy: 0.5095 - val_loss: 1.4130
+Epoch 21/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5709 - loss: 1.2024 - val_accuracy: 0.5088 - val_loss: 1.4100
+Epoch 22/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5683 - loss: 1.2037 - val_accuracy: 0.4997 - val_loss: 1.4325
+Epoch 23/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5741 - loss: 1.1918 - val_accuracy: 0.5111 - val_loss: 1.4077
+Epoch 24/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5790 - loss: 1.1770 - val_accuracy: 0.5060 - val_loss: 1.4286
+Epoch 25/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5789 - loss: 1.1727 - val_accuracy: 0.5086 - val_loss: 1.4102
+Epoch 26/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5886 - loss: 1.1536 - val_accuracy: 0.5116 - val_loss: 1.4038
+Epoch 27/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5827 - loss: 1.1658 - val_accuracy: 0.5094 - val_loss: 1.4093
+Epoch 28/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5908 - loss: 1.1492 - val_accuracy: 0.5063 - val_loss: 1.4290
+Epoch 29/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5869 - loss: 1.1501 - val_accuracy: 0.5154 - val_loss: 1.4127
+Epoch 30/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.5976 - loss: 1.1270 - val_accuracy: 0.5021 - val_loss: 1.4380
+Epoch 31/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6029 - loss: 1.1129 - val_accuracy: 0.5117 - val_loss: 1.4175
+Epoch 32/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6026 - loss: 1.1141 - val_accuracy: 0.5149 - val_loss: 1.4133
+Epoch 33/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6053 - loss: 1.1023 - val_accuracy: 0.4982 - val_loss: 1.4640
+Epoch 34/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6043 - loss: 1.1088 - val_accuracy: 0.5088 - val_loss: 1.4574
+Epoch 35/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6095 - loss: 1.0943 - val_accuracy: 0.5045 - val_loss: 1.4581
+Epoch 36/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6158 - loss: 1.0825 - val_accuracy: 0.5000 - val_loss: 1.4816
+Epoch 37/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6130 - loss: 1.0782 - val_accuracy: 0.5156 - val_loss: 1.4537
+Epoch 38/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6178 - loss: 1.0788 - val_accuracy: 0.5061 - val_loss: 1.4495
+Epoch 39/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6180 - loss: 1.0616 - val_accuracy: 0.5037 - val_loss: 1.4803
+Epoch 40/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6185 - loss: 1.0620 - val_accuracy: 0.5113 - val_loss: 1.4577
+Epoch 41/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6253 - loss: 1.0491 - val_accuracy: 0.5061 - val_loss: 1.4802
+Epoch 42/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6265 - loss: 1.0533 - val_accuracy: 0.5151 - val_loss: 1.4563
+Epoch 43/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6295 - loss: 1.0347 - val_accuracy: 0.5110 - val_loss: 1.4838
+Epoch 44/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6272 - loss: 1.0365 - val_accuracy: 0.5042 - val_loss: 1.4808
+Epoch 45/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6341 - loss: 1.0312 - val_accuracy: 0.5110 - val_loss: 1.4937
+Epoch 46/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6347 - loss: 1.0128 - val_accuracy: 0.5095 - val_loss: 1.4871
+Epoch 47/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6381 - loss: 1.0077 - val_accuracy: 0.5113 - val_loss: 1.4969
+Epoch 48/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6360 - loss: 1.0075 - val_accuracy: 0.5082 - val_loss: 1.4954
+Epoch 49/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6456 - loss: 0.9931 - val_accuracy: 0.5113 - val_loss: 1.4738
+Epoch 50/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6458 - loss: 0.9856 - val_accuracy: 0.5041 - val_loss: 1.5448
+Epoch 51/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6401 - loss: 1.0107 - val_accuracy: 0.5101 - val_loss: 1.5022
+Epoch 52/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6483 - loss: 0.9798 - val_accuracy: 0.5039 - val_loss: 1.5522
+Epoch 53/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6438 - loss: 0.9893 - val_accuracy: 0.5052 - val_loss: 1.5441
+Epoch 54/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6549 - loss: 0.9645 - val_accuracy: 0.5088 - val_loss: 1.5331
+Epoch 55/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6510 - loss: 0.9724 - val_accuracy: 0.4942 - val_loss: 1.5968
+Epoch 56/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6526 - loss: 0.9685 - val_accuracy: 0.4960 - val_loss: 1.5533
+Epoch 57/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6505 - loss: 0.9690 - val_accuracy: 0.5129 - val_loss: 1.5221
+Epoch 58/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6568 - loss: 0.9609 - val_accuracy: 0.5005 - val_loss: 1.5793
+Epoch 59/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6599 - loss: 0.9448 - val_accuracy: 0.4991 - val_loss: 1.5588
+Epoch 60/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6572 - loss: 0.9573 - val_accuracy: 0.4981 - val_loss: 1.6022
+Epoch 61/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6648 - loss: 0.9368 - val_accuracy: 0.5094 - val_loss: 1.5452
+Epoch 62/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6604 - loss: 0.9538 - val_accuracy: 0.5037 - val_loss: 1.5583
+Epoch 63/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6604 - loss: 0.9404 - val_accuracy: 0.4979 - val_loss: 1.5927
+Epoch 64/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6676 - loss: 0.9222 - val_accuracy: 0.5037 - val_loss: 1.5890
+Epoch 65/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6673 - loss: 0.9300 - val_accuracy: 0.4931 - val_loss: 1.6082
+Epoch 66/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6676 - loss: 0.9277 - val_accuracy: 0.4952 - val_loss: 1.6164
+Epoch 67/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6721 - loss: 0.9118 - val_accuracy: 0.5000 - val_loss: 1.6033
+Epoch 68/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6705 - loss: 0.9161 - val_accuracy: 0.5067 - val_loss: 1.6092
+Epoch 69/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6678 - loss: 0.9125 - val_accuracy: 0.4923 - val_loss: 1.6969
+Epoch 70/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6746 - loss: 0.9045 - val_accuracy: 0.4953 - val_loss: 1.6708
+Epoch 71/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6777 - loss: 0.8998 - val_accuracy: 0.5000 - val_loss: 1.6743
+Epoch 72/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6822 - loss: 0.8889 - val_accuracy: 0.4999 - val_loss: 1.6360
+Epoch 73/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6770 - loss: 0.9004 - val_accuracy: 0.5103 - val_loss: 1.6465
+Epoch 74/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6799 - loss: 0.8904 - val_accuracy: 0.4888 - val_loss: 1.6944
+Epoch 75/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6822 - loss: 0.8876 - val_accuracy: 0.4986 - val_loss: 1.6749
+Epoch 76/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6812 - loss: 0.8883 - val_accuracy: 0.4910 - val_loss: 1.7090
+Epoch 77/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6814 - loss: 0.8836 - val_accuracy: 0.4842 - val_loss: 1.7273
+Epoch 78/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6776 - loss: 0.8933 - val_accuracy: 0.5005 - val_loss: 1.6852
+Epoch 79/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6824 - loss: 0.8830 - val_accuracy: 0.5002 - val_loss: 1.6650
+Epoch 80/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6849 - loss: 0.8747 - val_accuracy: 0.4889 - val_loss: 1.7700
+Epoch 81/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6843 - loss: 0.8707 - val_accuracy: 0.4858 - val_loss: 1.7478
+Epoch 82/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6862 - loss: 0.8746 - val_accuracy: 0.4998 - val_loss: 1.7017
+Epoch 83/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6917 - loss: 0.8553 - val_accuracy: 0.4951 - val_loss: 1.6784
+Epoch 84/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6904 - loss: 0.8577 - val_accuracy: 0.5021 - val_loss: 1.6915
+Epoch 85/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6927 - loss: 0.8521 - val_accuracy: 0.4912 - val_loss: 1.7380
+Epoch 86/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6914 - loss: 0.8536 - val_accuracy: 0.4928 - val_loss: 1.7579
+Epoch 87/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6928 - loss: 0.8603 - val_accuracy: 0.4949 - val_loss: 1.7781
+Epoch 88/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6931 - loss: 0.8548 - val_accuracy: 0.5021 - val_loss: 1.7231
+Epoch 89/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6973 - loss: 0.8433 - val_accuracy: 0.4945 - val_loss: 1.7621
+Epoch 90/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6978 - loss: 0.8412 - val_accuracy: 0.4901 - val_loss: 1.7802
+Epoch 91/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7017 - loss: 0.8260 - val_accuracy: 0.4935 - val_loss: 1.7875
+Epoch 92/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6992 - loss: 0.8417 - val_accuracy: 0.4952 - val_loss: 1.7766
+Epoch 93/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7004 - loss: 0.8331 - val_accuracy: 0.4857 - val_loss: 1.8231
+Epoch 94/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.6978 - loss: 0.8409 - val_accuracy: 0.4892 - val_loss: 1.7893
+Epoch 95/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">6s</span> 7ms/step - accuracy: 0.7025 - loss: 0.8297 - val_accuracy: 0.4960 - val_loss: 1.7906
+Epoch 96/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7046 - loss: 0.8205 - val_accuracy: 0.4890 - val_loss: 1.8139
+Epoch 97/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7032 - loss: 0.8259 - val_accuracy: 0.4989 - val_loss: 1.7844
+Epoch 98/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7021 - loss: 0.8270 - val_accuracy: 0.4894 - val_loss: 1.8214
+Epoch 99/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7074 - loss: 0.8110 - val_accuracy: 0.4938 - val_loss: 1.7795
+Epoch 100/100
+<span class=" -Color -Color-Bold">782/782</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">5s</span> 7ms/step - accuracy: 0.7091 - loss: 0.8105 - val_accuracy: 0.4890 - val_loss: 1.8045
 </pre></div>
 </div>
 </div>
@@ -726,7 +1071,7 @@ Epoch 15/15
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Evaluando los Resultados del Modelo 2 ---
 </pre></div>
 </div>
-<img alt="_images/71693f0e281ce6835d4b6a83190391c5b029f09c641ad2dc6235ed88d17b3368.png" src="_images/71693f0e281ce6835d4b6a83190391c5b029f09c641ad2dc6235ed88d17b3368.png" />
+<img alt="_images/343721d7b286817cf3358632f1df44556e931ed63fb6a557ba74f347874a160c.png" src="_images/343721d7b286817cf3358632f1df44556e931ed63fb6a557ba74f347874a160c.png" />
 </div>
 </div>
 </section>
