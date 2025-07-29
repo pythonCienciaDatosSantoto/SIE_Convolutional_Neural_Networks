@@ -22,14 +22,13 @@ A continuación, encontrarás el plan de estudios que hemos preparado para estas
 * **Limitaciones de las redes neuronales tradicionales:** El problema con las imágenes.
 * **La inspiración biológica:** El córtex visual.
 * **Componentes clave:** Convoluciones, capas de *pooling* y funciones de activación.
-* **Taller práctico:** Tu primera convolución.
 
 ### **Sesión 2: Construyendo Nuestra Primera CNN**
 
 *(Aquí puedes detallar el contenido de la segunda sesión. Por ejemplo:)*
 * **Arquitecturas Famosas:** LeNet, AlexNet.
 * **Manos a la obra:** Usando TensorFlow/Keras para construir una CNN.
-* **El set de datos:** Trabajando con MNIST o CIFAR-10.
+* **El set de datos:** Trabajando con CIFAR-10.
 * **Entrenamiento y evaluación:** ¿Cómo saber si nuestro modelo aprende?
 * **Taller práctico:** Entrenando un clasificador de imágenes.
 
@@ -40,6 +39,5 @@ A continuación, encontrarás el plan de estudios que hemos preparado para estas
 * ***Transfer Learning:*** No reinventes la rueda.
 * **Aplicaciones avanzadas:** Detección de objetos y segmentación.
 * **Próximos pasos:** ¿Hacia dónde puedes llevar este conocimiento?
-* **Proyecto final:** Presentación de ideas.
 
 ---
