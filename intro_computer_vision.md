@@ -56,6 +56,8 @@ Artículos Científicos (Papers) Clave
 
 + ResNet: He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. [Link al paper:](https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf)
 
++ Petersen, P., & Zech, J. (2024). Mathematical theory of deep learning. arXiv preprint arXiv:2407.18384. [Link al paper](https://arxiv.org/pdf/2407.18384)
+
 Libros Recomendados
 "Deep Learning with Python" por François Chollet (creador de Keras). Excelente para una introducción práctica.
 
