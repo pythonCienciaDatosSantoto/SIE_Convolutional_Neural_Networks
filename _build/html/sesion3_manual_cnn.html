@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CNNs desde Cero - Operaciones y Entrenamiento &#8212; Programación para Ciencia de Datos</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sesion3_manual_cnn';</script>
+    <link rel="canonical" href="https://pythoncienciadatossantoto.github.io/SIE_Convolutional_Neural_Networks/sesion3_manual_cnn.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introducción a las R-CNN (Regions with CNN features)" href="sesion3_intro_to_rcnn.html" />
+    <link rel="prev" title="Arquitecturas Fundacionales de CNN - LeNet-5 y AlexNet" href="sesion2_classical_cnn_architectures.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_sie.png" class="logo__image only-light" alt="Programación para Ciencia de Datos - Home"/>
+    <script>document.write(`<img src="_static/logo_sie.png" class="logo__image only-dark" alt="Programación para Ciencia de Datos - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_computer_vision.html">Introducción a la Visión por Computador (Computer Vision)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion1_ann_in_computer_vision.html">Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion1_intro_to_cnn.html">Los Bloques Fundamentales de las CNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion2_practical_cnn.html">Construyendo Nuestra Primera CNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion2_classical_cnn_architectures.html">Arquitecturas Fundacionales de CNN - LeNet-5 y AlexNet</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">CNNs desde Cero - Operaciones y Entrenamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion3_intro_to_rcnn.html">Introducción a las R-CNN (Regions with CNN features)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion3_ssd_architecture.html">Detección de Objetos con SSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion3_yolo_architecture.html">Detección de Objetos en Tiempo Real con YOLO</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/sesion3_manual_cnn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>CNNs desde Cero - Operaciones y Entrenamiento</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-1-anatomia-de-una-capa-convolucional-forward-pass">Parte 1: Anatomía de una Capa Convolucional (Forward Pass)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-2-entrenamiento-de-una-mini-cnn-completa">Parte 2: Entrenamiento de una Mini-CNN Completa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-del-notebook">Conclusión del Notebook</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cnns-desde-cero-operaciones-y-entrenamiento">
+<h1>CNNs desde Cero - Operaciones y Entrenamiento<a class="headerlink" href="#cnns-desde-cero-operaciones-y-entrenamiento" title="Link to this heading">#</a></h1>
+<p><strong>Objetivo:</strong> En este notebook especial, vamos a desmitificar por completo las Redes Neuronales Convolucionales. Dejaremos de lado TensorFlow y construiremos las operaciones fundamentales desde cero usando únicamente NumPy.</p>
+<ol class="arabic simple">
+<li><p><strong>Parte 1:</strong> Ilustraremos el <code class="docutils literal notranslate"><span class="pre">forward</span> <span class="pre">pass</span></code> de una única capa convolucional para entender mecánicamente cómo funcionan el padding, la convolución, la activación y el pooling.</p></li>
+<li><p><strong>Parte 2:</strong> Simularemos el entrenamiento de una mini-CNN completa para ver cómo la red puede <em>aprender</em> los filtros correctos a través de la retropropagación y el descenso de gradiente.</p></li>
+</ol>
+<section id="parte-1-anatomia-de-una-capa-convolucional-forward-pass">
+<h2>Parte 1: Anatomía de una Capa Convolucional (Forward Pass)<a class="headerlink" href="#parte-1-anatomia-de-una-capa-convolucional-forward-pass" title="Link to this heading">#</a></h2>
+<p>En esta primera parte, nos enfocamos en visualizar qué ocurre dentro de una capa <code class="docutils literal notranslate"><span class="pre">Conv2D</span></code> cuando procesa una imagen. La siguiente clase, <code class="docutils literal notranslate"><span class="pre">CapaConvolucionalManual</span></code>, implementa cada paso de forma explícita.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CapaConvolucionalManual</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Una clase para demostrar el funcionamiento de una capa convolucional</span>
+<span class="sd">    y de pooling desde cero, utilizando únicamente NumPy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pool_stride</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inicializa la capa con sus hiperparámetros.</span>
+
+<span class="sd">        :param kernel: El filtro (o kernel) a aplicar. Debe ser un array 2D de NumPy.</span>
+<span class="sd">        :type kernel: np.ndarray</span>
+<span class="sd">        :param stride: El paso (stride) del filtro al convolucionar.</span>
+<span class="sd">        :type stride: int</span>
+<span class="sd">        :param padding: El ancho del relleno (padding) a añadir a la imagen.</span>
+<span class="sd">        :type padding: int</span>
+<span class="sd">        :param pool_size: El tamaño de la ventana de pooling (ej. 2 para una ventana de 2x2).</span>
+<span class="sd">        :type pool_size: int</span>
+<span class="sd">        :param pool_stride: El paso (stride) de la ventana de pooling.</span>
+<span class="sd">        :type pool_stride: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">=</span> <span class="n">stride</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span> <span class="o">=</span> <span class="n">pool_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool_stride</span> <span class="o">=</span> <span class="n">pool_stride</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Capa inicializada con éxito.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kernel (Filtro):</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stride: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stride</span><span class="si">}</span><span class="s2">, Padding: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tamaño de Pooling: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span><span class="si">}</span><span class="s2">, Stride de Pooling: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pool_stride</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_aplicar_padding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagen</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">imagen</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">imagen</span><span class="p">,</span> <span class="n">pad_width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_operacion_convolucion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region_imagen</span><span class="p">):</span>
+        <span class="n">producto</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">*</span> <span class="n">region_imagen</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">producto</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">convolucionar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagen_padded</span><span class="p">):</span>
+        <span class="n">alto_kernel</span><span class="p">,</span> <span class="n">ancho_kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">alto_imagen</span><span class="p">,</span> <span class="n">ancho_imagen</span> <span class="o">=</span> <span class="n">imagen_padded</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">alto_salida</span> <span class="o">=</span> <span class="p">(</span><span class="n">alto_imagen</span> <span class="o">-</span> <span class="n">alto_kernel</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">ancho_salida</span> <span class="o">=</span> <span class="p">(</span><span class="n">ancho_imagen</span> <span class="o">-</span> <span class="n">ancho_kernel</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">feature_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">alto_salida</span><span class="p">,</span> <span class="n">ancho_salida</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">alto_salida</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ancho_salida</span><span class="p">):</span>
+                <span class="n">y_inicio</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span>
+                <span class="n">x_inicio</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">stride</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">imagen_padded</span><span class="p">[</span><span class="n">y_inicio</span> <span class="p">:</span> <span class="n">y_inicio</span> <span class="o">+</span> <span class="n">alto_kernel</span><span class="p">,</span> <span class="n">x_inicio</span> <span class="p">:</span> <span class="n">x_inicio</span> <span class="o">+</span> <span class="n">ancho_kernel</span><span class="p">]</span>
+                <span class="n">feature_map</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operacion_convolucion</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">feature_map</span>
+
+    <span class="k">def</span> <span class="nf">_relu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_map</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">feature_map</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_max_pooling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_map_activado</span><span class="p">):</span>
+        <span class="n">alto_mapa</span><span class="p">,</span> <span class="n">ancho_mapa</span> <span class="o">=</span> <span class="n">feature_map_activado</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">alto_salida</span> <span class="o">=</span> <span class="p">(</span><span class="n">alto_mapa</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_stride</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">ancho_salida</span> <span class="o">=</span> <span class="p">(</span><span class="n">ancho_mapa</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_stride</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">pooled_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">alto_salida</span><span class="p">,</span> <span class="n">ancho_salida</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">alto_salida</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ancho_salida</span><span class="p">):</span>
+                <span class="n">y_inicio</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_stride</span>
+                <span class="n">x_inicio</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_stride</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">feature_map_activado</span><span class="p">[</span><span class="n">y_inicio</span> <span class="p">:</span> <span class="n">y_inicio</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span><span class="p">,</span> <span class="n">x_inicio</span> <span class="p">:</span> <span class="n">x_inicio</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool_size</span><span class="p">]</span>
+                <span class="n">pooled_map</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pooled_map</span>
+
+    <span class="k">def</span> <span class="nf">forward_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagen</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- INICIANDO FORWARD PASS ---&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Aplicando Padding...&quot;</span><span class="p">)</span>
+        <span class="n">imagen_padded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aplicar_padding</span><span class="p">(</span><span class="n">imagen</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Imagen Original:</span><span class="se">\n</span><span class="si">{</span><span class="n">imagen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Imagen con Padding (tamaño </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="si">}</span><span class="s2">):</span><span class="se">\n</span><span class="si">{</span><span class="n">imagen_padded</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Aplicando Convolución...&quot;</span><span class="p">)</span>
+        <span class="n">feature_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convolucionar</span><span class="p">(</span><span class="n">imagen_padded</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mapa de Características (Feature Map) resultante:</span><span class="se">\n</span><span class="si">{</span><span class="n">feature_map</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Aplicando Activación ReLU...&quot;</span><span class="p">)</span>
+        <span class="n">feature_map_activado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relu</span><span class="p">(</span><span class="n">feature_map</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mapa de Características Activado (valores negativos a 0):</span><span class="se">\n</span><span class="si">{</span><span class="n">feature_map_activado</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Aplicando Max Pooling...&quot;</span><span class="p">)</span>
+        <span class="n">pooled_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_pooling</span><span class="p">(</span><span class="n">feature_map_activado</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mapa de Características Final (después de Pooling):</span><span class="se">\n</span><span class="si">{</span><span class="n">pooled_map</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- FORWARD PASS COMPLETADO ---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pooled_map</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Ejecución de la Parte 1 ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;### DEMOSTRACIÓN DE LA CAPA CONVOLUCIONAL MANUAL ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">imagen_ejemplo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">filtro_ejemplo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">capa_cnn</span> <span class="o">=</span> <span class="n">CapaConvolucionalManual</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">filtro_ejemplo</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pool_stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">resultado_final</span> <span class="o">=</span> <span class="n">capa_cnn</span><span class="o">.</span><span class="n">forward_pass</span><span class="p">(</span><span class="n">imagen_ejemplo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>### DEMOSTRACIÓN DE LA CAPA CONVOLUCIONAL MANUAL ###
+
+Capa inicializada con éxito.
+Kernel (Filtro):
+[[ 1  0 -1]
+ [ 1  0 -1]
+ [ 1  0 -1]]
+Stride: 1, Padding: 1
+Tamaño de Pooling: 2, Stride de Pooling: 2
+
+--- INICIANDO FORWARD PASS ---
+1. Aplicando Padding...
+Imagen Original:
+[[10 10 10  0  0]
+ [10 10 10  0  0]
+ [10 10 10  0  0]
+ [ 0  0  0 10 10]
+ [ 0  0  0 10 10]]
+Imagen con Padding (tamaño 1):
+[[ 0  0  0  0  0  0  0]
+ [ 0 10 10 10  0  0  0]
+ [ 0 10 10 10  0  0  0]
+ [ 0 10 10 10  0  0  0]
+ [ 0  0  0  0 10 10  0]
+ [ 0  0  0  0 10 10  0]
+ [ 0  0  0  0  0  0  0]]
+
+2. Aplicando Convolución...
+Mapa de Características (Feature Map) resultante:
+[[-20.   0.  20.  20.   0.]
+ [-30.   0.  30.  30.   0.]
+ [-20.   0.  10.  10.  10.]
+ [-10.   0. -10. -10.  20.]
+ [  0.   0. -20. -20.  20.]]
+
+3. Aplicando Activación ReLU...
+Mapa de Características Activado (valores negativos a 0):
+[[ 0.  0. 20. 20.  0.]
+ [ 0.  0. 30. 30.  0.]
+ [ 0.  0. 10. 10. 10.]
+ [ 0.  0.  0.  0. 20.]
+ [ 0.  0.  0.  0. 20.]]
+
+4. Aplicando Max Pooling...
+Mapa de Características Final (después de Pooling):
+[[ 0. 30.]
+ [ 0. 10.]]
+
+--- FORWARD PASS COMPLETADO ---
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parte-2-entrenamiento-de-una-mini-cnn-completa">
+<h2>Parte 2: Entrenamiento de una Mini-CNN Completa<a class="headerlink" href="#parte-2-entrenamiento-de-una-mini-cnn-completa" title="Link to this heading">#</a></h2>
+<p>Ahora que entendemos las operaciones, vamos a unirlas en una red completa y a simular cómo “aprende”. Crearemos un dataset sintético donde el objetivo es clasificar si una imagen contiene una línea vertical u horizontal. Veremos cómo la red, partiendo de un filtro aleatorio, ajusta sus pesos para resolver la tarea.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generar_dataset</span><span class="p">(</span><span class="n">n_muestras</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Genera un dataset sintético de imágenes 5x5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_muestras</span><span class="p">):</span>
+        <span class="n">imagen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Línea vertical (target = 1)</span>
+            <span class="n">imagen</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Línea horizontal (target = 0)</span>
+            <span class="n">imagen</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">imagen</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imagen</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MiniCNNManual</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Una clase que simula una CNN completa con una capa convolucional,</span>
+<span class="sd">    pooling, y una capa densa para clasificación binaria.</span>
+<span class="sd">    Implementa el entrenamiento desde cero.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dense_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dense_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">=</span> <span class="n">learning_rate</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mini-CNN inicializada.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kernel inicial (aleatorio):</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_relu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_binary_cross_entropy_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">imagen</span><span class="p">):</span>
+        <span class="n">conv_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">imagen</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">conv_output</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">region</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="p">)</span>
+        <span class="n">relu_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_relu</span><span class="p">(</span><span class="n">conv_output</span><span class="p">)</span>
+        <span class="n">pool_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">relu_output</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">pool_output</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+        <span class="n">flattened_output</span> <span class="o">=</span> <span class="n">pool_output</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">dense_input</span> <span class="o">=</span> <span class="n">flattened_output</span>
+        <span class="n">dense_output</span> <span class="o">=</span> <span class="n">dense_input</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_weights</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_bias</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sigmoid</span><span class="p">(</span><span class="n">dense_output</span><span class="p">)</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;imagen&quot;</span><span class="p">:</span> <span class="n">imagen</span><span class="p">,</span> <span class="s2">&quot;conv_output&quot;</span><span class="p">:</span> <span class="n">conv_output</span><span class="p">,</span> <span class="s2">&quot;relu_output&quot;</span><span class="p">:</span> <span class="n">relu_output</span><span class="p">,</span>
+            <span class="s2">&quot;pool_output&quot;</span><span class="p">:</span> <span class="n">pool_output</span><span class="p">,</span> <span class="s2">&quot;dense_input&quot;</span><span class="p">:</span> <span class="n">dense_input</span><span class="p">,</span> <span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="n">prediction</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">cache</span>
+
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">cache</span><span class="p">):</span>
+        <span class="n">d_loss_d_pred</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">y_true</span> <span class="o">/</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">]))</span>
+        <span class="n">d_pred_d_dense</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">])</span>
+        <span class="n">d_loss_d_dense</span> <span class="o">=</span> <span class="n">d_loss_d_pred</span> <span class="o">*</span> <span class="n">d_pred_d_dense</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grad_dense_weights</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;dense_input&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">d_loss_d_dense</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grad_dense_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">d_loss_d_dense</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">d_loss_d_flatten</span> <span class="o">=</span> <span class="n">d_loss_d_dense</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_weights</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">d_loss_d_pool</span> <span class="o">=</span> <span class="n">d_loss_d_flatten</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;pool_output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">d_loss_d_relu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;relu_output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;relu_output&quot;</span><span class="p">][</span><span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">region</span> <span class="o">==</span> <span class="n">max_val</span><span class="p">)</span>
+                <span class="n">d_loss_d_relu</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">d_loss_d_pool</span><span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">]</span> <span class="o">*</span> <span class="n">mask</span>
+        <span class="n">d_relu_d_conv</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;relu_output&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">d_loss_d_conv</span> <span class="o">=</span> <span class="n">d_loss_d_relu</span> <span class="o">*</span> <span class="n">d_relu_d_conv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grad_kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="n">region</span> <span class="o">=</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;imagen&quot;</span><span class="p">][</span><span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">grad_kernel</span> <span class="o">+=</span> <span class="n">region</span> <span class="o">*</span> <span class="n">d_loss_d_conv</span><span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- INICIANDO ENTRENAMIENTO ---&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+            <span class="n">total_loss</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">imagen</span><span class="p">,</span> <span class="n">etiqueta</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+                <span class="n">prediccion</span><span class="p">,</span> <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">imagen</span><span class="p">)</span>
+                <span class="n">total_loss</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_cross_entropy_loss</span><span class="p">(</span><span class="n">etiqueta</span><span class="p">,</span> <span class="n">prediccion</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">etiqueta</span><span class="p">,</span> <span class="n">cache</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kernel</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad_kernel</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dense_weights</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad_dense_weights</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dense_bias</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad_dense_bias</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">avg_loss</span> <span class="o">=</span> <span class="n">total_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Época </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2">, Pérdida Promedio: </span><span class="si">{</span><span class="n">avg_loss</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- ENTRENAMIENTO COMPLETADO ---&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kernel final (aprendido):</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Ejecución de la Parte 2 ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">### SIMULACIÓN DE ENTRENAMIENTO DE MINI-CNN ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">generar_dataset</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">cnn</span> <span class="o">=</span> <span class="n">MiniCNNManual</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">cnn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- PROBANDO MODELO ENTRENADO ---&quot;</span><span class="p">)</span>
+<span class="n">test_vertical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">test_vertical</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">test_horizontal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">test_horizontal</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">pred_v</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cnn</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">test_vertical</span><span class="p">)</span>
+<span class="n">pred_h</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cnn</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">test_horizontal</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Imagen de prueba (Línea Vertical):</span><span class="se">\n</span><span class="si">{</span><span class="n">test_vertical</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicción (debería ser cercano a 1): </span><span class="si">{</span><span class="n">pred_v</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Imagen de prueba (Línea Horizontal):</span><span class="se">\n</span><span class="si">{</span><span class="n">test_horizontal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicción (debería ser cercano a 0): </span><span class="si">{</span><span class="n">pred_h</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>### SIMULACIÓN DE ENTRENAMIENTO DE MINI-CNN ###
+
+Mini-CNN inicializada.
+Kernel inicial (aleatorio):
+[[-0.02355612  0.00804416  0.03578015]
+ [ 0.05786005 -0.01891272 -0.03601907]
+ [-0.05485257  0.01644713  0.09190044]]
+
+--- INICIANDO ENTRENAMIENTO ---
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Época 10/50, Pérdida Promedio: 0.2841
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Época 20/50, Pérdida Promedio: 0.0348
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Época 30/50, Pérdida Promedio: 0.0111
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Época 40/50, Pérdida Promedio: 0.0060
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Época 50/50, Pérdida Promedio: 0.0039
+--- ENTRENAMIENTO COMPLETADO ---
+Kernel final (aprendido):
+[[-0.60901178  0.76119948 -0.55159816]
+ [-0.50227857  0.73741483 -0.6180919 ]
+ [ 0.41475851  1.85295713  0.57305541]]
+
+--- PROBANDO MODELO ENTRENADO ---
+
+Imagen de prueba (Línea Vertical):
+[[0. 0. 1. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 1. 0. 0.]]
+Predicción (debería ser cercano a 1): 0.9955
+
+Imagen de prueba (Línea Horizontal):
+[[0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0.]
+ [1. 1. 1. 1. 1.]
+ [0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0.]]
+Predicción (debería ser cercano a 0): 0.0066
+</pre></div>
+</div>
+</div>
+</div>
+<section id="conclusion-del-notebook">
+<h3>Conclusión del Notebook<a class="headerlink" href="#conclusion-del-notebook" title="Link to this heading">#</a></h3>
+<p>En este notebook hemos construido una CNN desde sus cimientos. Vimos cómo las operaciones matemáticas de convolución y pooling transforman una imagen, y lo más importante, cómo el proceso de entrenamiento (forward y backward pass) permite a la red <strong>aprender</strong> los valores correctos para sus filtros, especializándose en la tarea que le hemos asignado. Este entendimiento fundamental es clave para usar eficazmente las librerías de alto nivel como TensorFlow y Keras.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sesion2_classical_cnn_architectures.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Arquitecturas Fundacionales de CNN - LeNet-5 y AlexNet</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sesion3_intro_to_rcnn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introducción a las R-CNN (Regions with CNN features)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-1-anatomia-de-una-capa-convolucional-forward-pass">Parte 1: Anatomía de una Capa Convolucional (Forward Pass)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-2-entrenamiento-de-una-mini-cnn-completa">Parte 2: Entrenamiento de una Mini-CNN Completa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-del-notebook">Conclusión del Notebook</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wilmer Pineda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

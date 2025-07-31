@@ -7,3 +7,7 @@ chapters:
   - file: sesion1_intro_to_cnn
   - file: sesion2_practical_cnn
   - file: sesion2_classical_cnn_architectures
+  - file: sesion3_manual_cnn
+  - file: sesion3_intro_to_rcnn
+  - file: sesion3_ssd_architecture
+  - file: sesion3_yolo_architecture
