@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Detección de Objetos con SSD &#8212; Programación para Ciencia de Datos</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sesion3_ssd_architecture';</script>
+    <link rel="canonical" href="https://pythoncienciadatossantoto.github.io/SIE_Convolutional_Neural_Networks/sesion3_ssd_architecture.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Detección de Objetos en Tiempo Real con YOLO" href="sesion3_yolo_architecture.html" />
+    <link rel="prev" title="Introducción a las R-CNN (Regions with CNN features)" href="sesion3_intro_to_rcnn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_sie.png" class="logo__image only-light" alt="Programación para Ciencia de Datos - Home"/>
+    <script>document.write(`<img src="_static/logo_sie.png" class="logo__image only-dark" alt="Programación para Ciencia de Datos - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🧠 ¡Bienvenido/a al Cursillo de Introducción a las Redes Neuronales Convolucionales (CNNs)! 🧠
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_computer_vision.html">Introducción a la Visión por Computador (Computer Vision)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion1_ann_in_computer_vision.html">Sesión 1: Redes Neuronales Densas para Clasificación de Imágenes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion1_intro_to_cnn.html">Los Bloques Fundamentales de las CNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion2_practical_cnn.html">Construyendo Nuestra Primera CNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion2_classical_cnn_architectures.html">Arquitecturas Fundacionales de CNN - LeNet-5 y AlexNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion3_manual_cnn.html">CNNs desde Cero - Operaciones y Entrenamiento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion3_intro_to_rcnn.html">Introducción a las R-CNN (Regions with CNN features)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Detección de Objetos con SSD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sesion3_yolo_architecture.html">Detección de Objetos en Tiempo Real con YOLO</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/sesion3_ssd_architecture.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Detección de Objetos con SSD</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssd-una-alternativa-de-deteccion-en-un-solo-paso">1. SSD: Una Alternativa de Detección en Un Solo Paso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-deteccion-con-un-modelo-ssd-pre-entrenado">2. Práctica: Detección con un Modelo SSD Pre-entrenado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-auxiliar-para-deteccion-y-visualizacion">3. Función Auxiliar para Detección y Visualización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probando-el-modelo-con-nuestros-ejemplos">4. Probando el Modelo con Nuestros Ejemplos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-sobre-ssd">5. Conclusiones sobre SSD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-bibliograficas">Referencias Bibliográficas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="deteccion-de-objetos-con-ssd">
+<h1>Detección de Objetos con SSD<a class="headerlink" href="#deteccion-de-objetos-con-ssd" title="Link to this heading">#</a></h1>
+<p><strong>Objetivo:</strong> Antes de saltar a la arquitectura YOLO, exploraremos otro influyente detector de un solo paso: SSD (Single Shot MultiBox Detector). Entenderemos su enfoque único para detectar objetos de diferentes tamaños y lo pondremos a prueba con nuestro conjunto de imágenes.</p>
+<section id="ssd-una-alternativa-de-deteccion-en-un-solo-paso">
+<h2>1. SSD: Una Alternativa de Detección en Un Solo Paso<a class="headerlink" href="#ssd-una-alternativa-de-deteccion-en-un-solo-paso" title="Link to this heading">#</a></h2>
+<p>SSD, al igual que YOLO, es un detector de un solo paso, lo que significa que realiza la localización y clasificación en una sola pasada por la red. Sin embargo, su principal innovación radica en cómo maneja la detección de objetos a diferentes escalas.</p>
+<p><strong>¿Cómo funciona?</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Backbone y Mapas de Características a Múltiples Escalas:</strong> SSD utiliza una red convolucional base (como VGG o MobileNet) para extraer características. A diferencia de otros modelos que solo usan el mapa de características final, SSD toma “instantáneas” de los mapas de características en diferentes etapas de la red (tempranas, intermedias y tardías). Los mapas tempranos (más grandes) son útiles para detectar objetos pequeños, mientras que los mapas tardíos (más pequeños y profundos) son mejores para detectar objetos grandes.</p></li>
+<li><p><strong>Cajas de Anclaje (Anchor Boxes):</strong> En cada ubicación de estos mapas de características, SSD coloca un conjunto de cajas delimitadoras predeterminadas, llamadas <strong>anchor boxes</strong> (o cajas de anclaje). Estas cajas tienen diferentes tamaños y relaciones de aspecto (unas son cuadradas, otras altas, otras anchas).</p></li>
+<li><p><strong>Predicción de Desplazamientos y Clases:</strong> En lugar de predecir un cuadro desde cero, la red aprende a predecir dos cosas para cada caja de anclaje:</p>
+<ul class="simple">
+<li><p><strong>Desplazamientos (Offsets):</strong> Qué tanto debe ajustar (mover, escalar) la caja de anclaje para que se ajuste perfectamente al objeto real.</p></li>
+<li><p><strong>Puntuaciones de Clase:</strong> La probabilidad de que esa caja (una vez ajustada) contenga cada uno de los objetos posibles (más una clase para “fondo”).</p></li>
+</ul>
+</li>
+</ol>
+<p><img alt="Diagrama conceptual de SSD" src="_images/ssd_architecture.png" /></p>
+<p><em>SSD utiliza mapas de características de diferentes capas del backbone para predecir objetos de distintos tamaños.</em></p>
+</section>
+<section id="practica-deteccion-con-un-modelo-ssd-pre-entrenado">
+<h2>2. Práctica: Detección con un Modelo SSD Pre-entrenado<a class="headerlink" href="#practica-deteccion-con-un-modelo-ssd-pre-entrenado" title="Link to this heading">#</a></h2>
+<p>Para esta práctica, utilizaremos un modelo SSD pre-entrenado disponible en <strong>TensorFlow Hub</strong>, un repositorio de modelos de machine learning listos para usar. Esto nos permite aplicar un modelo potente sin necesidad de entrenarlo desde cero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_hub</span> <span class="k">as</span> <span class="nn">hub</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_estimator\python\estimator\util.py:74: The name tf.train.SessionRunHook is deprecated. Please use tf.estimator.SessionRunHook instead.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_hub\native_module.py:92: The name tf.GraphKeys is deprecated. Please use tf.compat.v1.GraphKeys instead.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_hub\saved_model_module.py:40: The name tf.saved_model.constants.LEGACY_INIT_OP_KEY is deprecated. Please use tf.compat.v1.saved_model.constants.LEGACY_INIT_OP_KEY instead.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 3: Cargar el modelo SSD desde TensorFlow Hub</span>
+<span class="n">model_url</span> <span class="o">=</span> <span class="s2">&quot;https://tfhub.dev/tensorflow/ssd_mobilenet_v2/2&quot;</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_hub\resolver.py:120: The name tf.gfile.MakeDirs is deprecated. Please use tf.io.gfile.makedirs instead.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_hub\resolver.py:120: The name tf.gfile.MakeDirs is deprecated. Please use tf.io.gfile.makedirs instead.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_hub\module_v2.py:120: The name tf.saved_model.load_v2 is deprecated. Please use tf.compat.v2.saved_model.load instead.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From C:\Users\legion\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\tensorflow_hub\module_v2.py:120: The name tf.saved_model.load_v2 is deprecated. Please use tf.compat.v2.saved_model.load instead.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="funcion-auxiliar-para-deteccion-y-visualizacion">
+<h2>3. Función Auxiliar para Detección y Visualización<a class="headerlink" href="#funcion-auxiliar-para-deteccion-y-visualizacion" title="Link to this heading">#</a></h2>
+<p>Crearemos una función que tome la URL de una imagen, la procese con nuestro detector SSD y dibuje los resultados. El proceso es un poco más manual que con la librería <code class="docutils literal notranslate"><span class="pre">ultralytics</span></code>, lo que nos permite ver qué sucede internamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">detect_with_ssd</span><span class="p">(</span><span class="n">image_url</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Toma la URL de una imagen, la procesa con SSD y muestra los resultados.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Descargar y leer la imagen</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">image_url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">image_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="n">image_np</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">image_np</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+        <span class="n">image_np</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image_np</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+        
+        <span class="c1"># Convertir a tensor y añadir una dimensión de batch</span>
+        <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">image_np</span><span class="p">)</span>
+        <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">input_tensor</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        
+        <span class="c1"># Realizar la detección</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">detector</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+        
+        <span class="c1"># Procesar los resultados</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span><span class="n">value</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        
+        <span class="c1"># Dibujar los cuadros delimitadores en la imagen</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;detection_scores&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;detection_boxes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span> <span class="c1"># Umbral de confianza del 50%</span>
+                <span class="n">ymin</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">image_np</span><span class="o">.</span><span class="n">shape</span>
+                <span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">bottom</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmin</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">*</span> <span class="n">h</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">image_np</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">left</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">top</span><span class="p">)),</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">right</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">bottom</span><span class="p">)),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="c1"># Mostrar la imagen</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_np</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No se pudo procesar la imagen desde </span><span class="si">{</span><span class="n">image_url</span><span class="si">}</span><span class="s2">. Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="probando-el-modelo-con-nuestros-ejemplos">
+<h2>4. Probando el Modelo con Nuestros Ejemplos<a class="headerlink" href="#probando-el-modelo-con-nuestros-ejemplos" title="Link to this heading">#</a></h2>
+<p>Ahora, usemos nuestra función con la misma lista de imágenes que usaremos para YOLO.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;https://ultralytics.com/images/bus.jpg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://ultralytics.com/images/zidane.jpg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https://images.pexels.com/photos/3785931/pexels-photo-3785931.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1&#39;</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">image_urls</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--- Procesando imagen con SSD: </span><span class="si">{</span><span class="n">url</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s2">... ---&quot;</span><span class="p">)</span>
+    <span class="n">detect_with_ssd</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Procesando imagen con SSD: https://ultralytics.com/images/bus.jpg... ---
+</pre></div>
+</div>
+<img alt="_images/514649f858a635e5df783edfe81fcbd97ff060bcf26820248d3cade5ea9ed0db.png" src="_images/514649f858a635e5df783edfe81fcbd97ff060bcf26820248d3cade5ea9ed0db.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Procesando imagen con SSD: https://ultralytics.com/images/zidane.jpg... ---
+</pre></div>
+</div>
+<img alt="_images/4c818bbc6a5c3ebd3f4d0b5fc85e1f46d9994625dcdcbaabaa899d18c63bf14c.png" src="_images/4c818bbc6a5c3ebd3f4d0b5fc85e1f46d9994625dcdcbaabaa899d18c63bf14c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Procesando imagen con SSD: https://images.pexels.com/photos/1099680/pexels-ph... ---
+</pre></div>
+</div>
+<img alt="_images/7b617fd9af45d21a61d6dc9752a93df1eb84fac55e7b188a6305021de200fbbf.png" src="_images/7b617fd9af45d21a61d6dc9752a93df1eb84fac55e7b188a6305021de200fbbf.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Procesando imagen con SSD: https://images.pexels.com/photos/1571460/pexels-ph... ---
+</pre></div>
+</div>
+<img alt="_images/2e1dc2deb682d65b87d36355eb918c7904efe38b2628a4ba561f511b1d90f8a1.png" src="_images/2e1dc2deb682d65b87d36355eb918c7904efe38b2628a4ba561f511b1d90f8a1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Procesando imagen con SSD: https://images.pexels.com/photos/3785931/pexels-ph... ---
+</pre></div>
+</div>
+<img alt="_images/9750d99ecc1524554a64049f47033eb9d29dd5ae196963e150916eca2bf4ead8.png" src="_images/9750d99ecc1524554a64049f47033eb9d29dd5ae196963e150916eca2bf4ead8.png" />
+</div>
+</div>
+</section>
+<section id="conclusiones-sobre-ssd">
+<h2>5. Conclusiones sobre SSD<a class="headerlink" href="#conclusiones-sobre-ssd" title="Link to this heading">#</a></h2>
+<p>Como podemos ver, el modelo SSD es capaz de detectar muchos de los objetos clave en las imágenes. Sin embargo, podemos notar algunas diferencias con detectores más modernos:</p>
+<ul class="simple">
+<li><p><strong>Precisión:</strong> Aunque es bueno, puede que falle en detectar objetos más pequeños o que tenga más detecciones incorrectas (falsos positivos) en comparación con arquitecturas más recientes.</p></li>
+<li><p><strong>Simplicidad vs. Rendimiento:</strong> SSD fue un hito por su balance entre velocidad y precisión. Su concepto de usar mapas de características a múltiples escalas es fundamental y ha influenciado a muchas arquitecturas posteriores, incluyendo a YOLO.</p></li>
+</ul>
+<p>Entender SSD nos da una base sólida para apreciar las innovaciones que YOLO trajo después, especialmente en la forma en que el “Neck” de la red refina y combina estas características de múltiples escalas para lograr un rendimiento aún mayor. Ahora, estamos listos para ver a YOLO en acción y comparar los resultados.</p>
+</section>
+<section id="referencias-bibliograficas">
+<h2>Referencias Bibliográficas<a class="headerlink" href="#referencias-bibliograficas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>SSD:</strong> Liu, W., Anguelov, D., Erhan, D., Szegedy, C., Reed, S., Fu, C. Y., &amp; Berg, A. C. (2016). <a class="reference external" href="https://arxiv.org/pdf/1512.02325.pdf"><em>SSD: Single shot multibox detector.</em></a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sesion3_intro_to_rcnn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introducción a las R-CNN (Regions with CNN features)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sesion3_yolo_architecture.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Detección de Objetos en Tiempo Real con YOLO</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssd-una-alternativa-de-deteccion-en-un-solo-paso">1. SSD: Una Alternativa de Detección en Un Solo Paso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-deteccion-con-un-modelo-ssd-pre-entrenado">2. Práctica: Detección con un Modelo SSD Pre-entrenado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-auxiliar-para-deteccion-y-visualizacion">3. Función Auxiliar para Detección y Visualización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probando-el-modelo-con-nuestros-ejemplos">4. Probando el Modelo con Nuestros Ejemplos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones-sobre-ssd">5. Conclusiones sobre SSD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-bibliograficas">Referencias Bibliográficas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wilmer Pineda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

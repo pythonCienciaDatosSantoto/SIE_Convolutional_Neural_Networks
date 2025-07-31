@@ -37,14 +37,14 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Flatten
-from tensorflow.keras.datasets import cifar10
-import numpy as np
-import matplotlib.pyplot as plt
+print("\n--- Compilando y Entrenando el Modelo 1 ---")
+model_1.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
 
-print("TensorFlow version:", tf.__version__)
+history_1 = model_1.fit(x_train_norm, y_train_cat,
+                      epochs=100,
+                      batch_size=64,
+                      validation_data=(x_test_norm, y_test_cat))
 -------------------
 
